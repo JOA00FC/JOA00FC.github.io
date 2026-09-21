@@ -1,0 +1,29 @@
+name: YouTube para Discord
+on:
+  schedule:
+    - cron: '7,22,37,52 * * * *'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/youtube-discord.yml'
+      - 'scripts/youtube_discord.py'
+permissions:
+  contents: write
+concurrency:
+  group: youtube-discord
+  cancel-in-progress: false
+jobs:
+  notify:
+    if: github.repository == 'JOA00FC/JOA00FC.github.io'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - name: Checar novos videos e publicar no Discord
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          GITHUB_TOKEN: ${{ github.token }}
+        run: python3 scripts/youtube_discord.py
