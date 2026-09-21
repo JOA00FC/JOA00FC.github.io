@@ -30,7 +30,7 @@ def request(url, method='GET', data=None, token=None):
 
 def parse_feed(raw):
     root = ET.fromstring(raw)
-    if root.findtext('yt:channelId', namespaces=NS) != CHANNEL:
+    if root.findtext('yt:channelId', namespaces=NS) not in (CHANNEL, CHANNEL[2:]):
         raise ValueError('Feed recebido nao corresponde ao canal configurado.')
     videos = []
     for entry in root.findall('a:entry', NS):
