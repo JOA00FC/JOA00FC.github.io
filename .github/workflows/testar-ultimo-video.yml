@@ -1,8 +1,5 @@
 name: Testar ultimo video
 on:
-  push:
-    branches: [main]
-    paths: ['.github/workflows/testar-ultimo-video.yml']
   workflow_dispatch:
 permissions:
   contents: write
