@@ -1,0 +1,55 @@
+name: Testar ultimo video
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/testar-ultimo-video.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: youtube-discord
+  cancel-in-progress: false
+jobs:
+  test:
+    if: github.repository == 'JOA00FC/JOA00FC.github.io'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - name: Enviar ultimo video uma vez por destino
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          python3 - <<'PY'
+          import sys
+          import datetime as dt
+          sys.path.insert(0, 'scripts')
+          import youtube_discord as discord
+          import youtube_telegram as telegram
+          failures = []
+          def select_latest(videos, state):
+              latest = max(videos, key=lambda v: dt.datetime.fromisoformat(v['published'].replace('Z', '+00:00')))
+              if state.get('manual_test_20260921') == latest['id']:
+                  print('Este teste ja foi confirmado neste destino; nenhum reenvio.')
+                  return []
+              # Persisted only after the platform confirms the message.
+              state['manual_test_20260921'] = latest['id']
+              print('Video selecionado: ' + latest['title'])
+              print('https://www.youtube.com/watch?v=' + latest['id'])
+              return [latest]
+          for label, module in [('Discord', discord), ('Telegram', telegram)]:
+              module.pending = select_latest
+              try:
+                  print('Destino: ' + label)
+                  module.main()
+              except Exception as exc:
+                  # Never print exceptions with token-bearing request URLs.
+                  print(label + ': falha ' + type(exc).__name__ + '; credenciais omitidas.')
+                  failures.append(label)
+          if failures:
+              sys.exit(1)
+          PY
