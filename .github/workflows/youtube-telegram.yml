@@ -1,0 +1,30 @@
+name: YouTube para Telegram
+on:
+  schedule:
+    - cron: '10,25,40,55 * * * *'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/youtube-telegram.yml'
+      - 'scripts/youtube_telegram.py'
+permissions:
+  contents: write
+concurrency:
+  # Shared with Discord to serialize state writes in the repository.
+  group: youtube-discord
+  cancel-in-progress: false
+jobs:
+  notify:
+    if: github.repository == 'JOA00FC/JOA00FC.github.io'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - name: Validar bot e publicar novos videos no Telegram
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}
+        run: python3 scripts/youtube_telegram.py
