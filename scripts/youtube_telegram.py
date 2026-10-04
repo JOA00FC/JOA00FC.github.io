@@ -6,7 +6,7 @@ import os
 import re
 import sys
 import urllib.error
-from youtube_discord import CHANNEL, FEED, parse_feed, pending, request
+from youtube_discord import CHANNEL, FEED, parse_feed, pending, request, http_failure
 
 CHAT = '@JOA00FCYT'
 BOT = 'JOA00FCYT_bot'
@@ -92,7 +92,7 @@ if __name__ == '__main__':
         print(str(exc), file=sys.stderr)
         sys.exit(1)
     except urllib.error.HTTPError as exc:
-        print('Falha HTTP ' + str(exc.code) + '. Confira token, acesso ao canal e permissoes. Credenciais omitidas.', file=sys.stderr)
+        print(http_failure(exc), file=sys.stderr)
         sys.exit(1)
     except Exception as exc:
         print('Falha: ' + type(exc).__name__ + '. Credenciais e URLs privadas omitidas.', file=sys.stderr)
