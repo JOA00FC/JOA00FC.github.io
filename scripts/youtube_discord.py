@@ -5,6 +5,7 @@ import json
 import os
 import re
 import sys
+import time
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -24,8 +25,34 @@ def request(url, method='GET', data=None, token=None):
     if data is not None:
         headers['Content-Type'] = 'application/json'
     req = urllib.request.Request(url, data=None if data is None else json.dumps(data).encode(), headers=headers, method=method)
-    with urllib.request.urlopen(req, timeout=30) as response:
-        return response.read()
+    # Retry only the read-only YouTube feed, never message POSTs.
+    attempts = 4 if url == FEED and method == 'GET' else 1
+    for attempt in range(attempts):
+        try:
+            with urllib.request.urlopen(req, timeout=30) as response:
+                return response.read()
+        except urllib.error.HTTPError as exc:
+            retryable = exc.code in (404, 408, 429, 500, 502, 503, 504)
+            if not retryable or attempt == attempts - 1:
+                raise
+            exc.close()
+            print('YouTube: consulta indisponivel (HTTP ' + str(exc.code)
+                  + '); nova tentativa em breve.', flush=True)
+        except (urllib.error.URLError, TimeoutError):
+            if attempt == attempts - 1:
+                raise
+            print('YouTube: falha de conexao; nova tentativa em breve.', flush=True)
+        time.sleep(5 * (2 ** attempt))
+
+
+def http_failure(exc):
+    # Only a fixed service label is logged; URLs may contain private tokens.
+    host = urllib.parse.urlsplit(exc.url).hostname
+    service = {'www.youtube.com': 'YouTube (consulta de videos)',
+               'api.telegram.org': 'Telegram',
+               'api.github.com': 'GitHub (registro de avisos)'}.get(host, 'Discord')
+    return ('Falha HTTP ' + str(exc.code) + ' no ' + service
+            + '. Estado preservado; confira a proxima execucao. Credenciais omitidas.')
 
 
 def parse_feed(raw):
@@ -108,7 +135,7 @@ if __name__ == '__main__':
     try:
         main()
     except urllib.error.HTTPError as exc:
-        print('Falha HTTP ' + str(exc.code) + '. Confira o servico e as permissoes; nenhuma credencial foi registrada.', file=sys.stderr)
+        print(http_failure(exc), file=sys.stderr)
         sys.exit(1)
     except Exception as exc:
         # Network exceptions may contain a credential-bearing URL: print only the type.
