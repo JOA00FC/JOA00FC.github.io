@@ -6,7 +6,7 @@ import os
 import re
 import sys
 import urllib.error
-from youtube_discord import CHANNEL, FEED, parse_feed, pending, request, http_failure
+from youtube_discord import CHANNEL, FEED, parse_feed, pending, request, http_failure, fetch_videos
 
 CHAT = '@JOA00FCYT'
 BOT = 'JOA00FCYT_bot'
@@ -43,7 +43,6 @@ def main():
         raise SetupError('Adicione o bot como administrador com permissao Postar mensagens.')
     print('Bot e canal corretos; permissao de postagem confirmada.')
     started = dt.datetime.now(dt.timezone.utc).isoformat()
-    videos = parse_feed(request(FEED))
     sha = None
     try:
         stored = json.loads(request(endpoint + '?ref=main', token=token))
@@ -53,6 +52,8 @@ def main():
         if exc.code != 404:
             raise
         state = None
+
+    videos = fetch_videos(state)
 
     def save(value):
         nonlocal sha
@@ -97,3 +98,4 @@ if __name__ == '__main__':
     except Exception as exc:
         print('Falha: ' + type(exc).__name__ + '. Credenciais e URLs privadas omitidas.', file=sys.stderr)
         sys.exit(1)
+
