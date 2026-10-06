@@ -73,10 +73,58 @@ def parse_feed(raw):
     return sorted(videos, key=lambda item: item['published'])
 
 
+def channel_videos(raw, state):
+    """Fallback: only videos listed before a previously delivered video."""
+    match = re.search(r'var ytInitialData\s*=\s*', raw)
+    if not match:
+        raise ValueError('Pagina sem dados de videos.')
+    page = json.JSONDecoder().raw_decode(raw[match.end():])[0]
+    if page.get('metadata', {}).get('channelMetadataRenderer', {}).get('externalId') != CHANNEL:
+        raise ValueError('Pagina de outro canal.')
+    tabs = page['contents']['twoColumnBrowseResultsRenderer']['tabs']
+    selected = next(t['tabRenderer'] for t in tabs if t.get('tabRenderer', {}).get('selected'))
+    items = selected['content']['richGridRenderer']['contents']
+    found = []
+    for item in items:
+        content = item.get('richItemRenderer', {}).get('content', {})
+        model = content.get('lockupViewModel', {})
+        old = content.get('videoRenderer', {})
+        if model.get('contentType') == 'LOCKUP_CONTENT_TYPE_VIDEO':
+            vid = model.get('contentId')
+            title = model.get('metadata', {}).get('lockupMetadataViewModel', {}).get('title', {}).get('content')
+        elif old:
+            vid = old.get('videoId')
+            title = ''.join(r.get('text', '') for r in old.get('title', {}).get('runs', []))
+        else:
+            continue
+        if not vid or not re.fullmatch(r'[A-Za-z0-9_-]{11}', vid) or not title:
+            raise ValueError('Video incompleto na pagina.')
+        if vid not in {v['id'] for v in found}:
+            found.append({'id': vid, 'title': title, 'after_seen_anchor': True})
+    if not state or not state.get('seen'):
+        raise ValueError('Fallback requer historico existente; nenhum aviso enviado.')
+    seen = set(state['seen'])
+    for index, video in enumerate(found):
+        if video['id'] in seen:
+            return list(reversed(found[:index]))
+    raise ValueError('Historico nao encontrado na pagina; envio interrompido para evitar avisos antigos.')
+
+
+def fetch_videos(state):
+    try:
+        return parse_feed(request(FEED))
+    except (urllib.error.URLError, TimeoutError, ET.ParseError):
+        print('Feed indisponivel; consultando a pagina oficial do canal.', flush=True)
+        raw = request('https://www.youtube.com/channel/' + CHANNEL + '/videos?hl=en').decode('utf-8')
+        videos = channel_videos(raw, state)
+        print('Pagina validada: ' + str(len(videos)) + ' video(s) apos o ultimo aviso.', flush=True)
+        return videos
+
+
 def pending(videos, state):
     start = dt.datetime.fromisoformat(state['started_at'])
     seen = set(state['seen'])
-    return [v for v in videos if v['id'] not in seen and dt.datetime.fromisoformat(v['published'].replace('Z', '+00:00')) >= start]
+    return [v for v in videos if v['id'] not in seen and (v.get('after_seen_anchor') is True or dt.datetime.fromisoformat(v['published'].replace('Z', '+00:00')) >= start)]
 
 
 def main():
@@ -87,7 +135,6 @@ def main():
     repo = os.environ['GITHUB_REPOSITORY']
     endpoint = 'https://api.github.com/repos/' + repo + '/contents/' + STATE_PATH
     started = dt.datetime.now(dt.timezone.utc).isoformat()
-    videos = parse_feed(request(FEED))
     # Read-only verification, never prints webhook or token.
     info = json.loads(request(webhook))
     if info.get('type') != 1:
@@ -101,6 +148,8 @@ def main():
         if exc.code != 404:
             raise
         state = None
+
+    videos = fetch_videos(state)
 
     def save(value):
         nonlocal sha
@@ -141,3 +190,4 @@ if __name__ == '__main__':
         # Network exceptions may contain a credential-bearing URL: print only the type.
         print('Falha: ' + type(exc).__name__ + '. Confira secrets, conectividade, feed e estado. Credenciais omitidas.', file=sys.stderr)
         sys.exit(1)
+
