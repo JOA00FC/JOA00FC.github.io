@@ -30,3 +30,16 @@ Fontes e documentação: https://github.com/JOA00FC/JOA00FC.github.io/tree/main/
 Canal: https://youtube.com/@JOA00FC
 
 A tradução não inclui cópia do jogo nem FastFiles proprietários.
+
+## Etapa de manutencao (somente autor do projeto)
+
+A instalacao limpa do GameHub carregou Team Player normalmente. Os hashes de `common.ff` e `code_post_gfx.ff` diferem da base usada na V6 anterior. Antes de gravar uma instalacao completa para o YouTube, reconstruiremos a traducao sobre os arquivos novos.
+
+Comando do coletor (somente para quem mantem o projeto):
+
+```bash
+curl -fL --retry 3 https://joa00fc.github.io/mw2-ptbr/coletar-base-limpa.py -o "$HOME/mw2-coletar.py" && python "$HOME/mw2-coletar.py"
+```
+
+O ZIP criado em Download contem arquivos proprietarios do jogo. **Nao publicar este ZIP ou os FastFiles completos no GitHub nem no site.** O download publico deve continuar sendo o pacote-fonte da traducao ou, no futuro, patches diferenciais aplicaveis aos arquivos de cada jogador.
+

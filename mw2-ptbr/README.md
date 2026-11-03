@@ -31,6 +31,20 @@ O comando gera `/sdcard/Download/MW2_BASE_NOVA_RELATORIO.zip` contendo apenas ha
 
 Veja o [roteiro do vídeo do JOA00FC](./tutorial-para-canal.md) e o [verificador](./verificar-gamehub.py).
 
+## Atualizacao do projeto pelo autor — nova base limpa
+
+Em 03/11/2026, o MW2 foi reinstalado no GameHub e **Team Player carregou normalmente sem traducao**. A base nova nao tem os mesmos hashes de `common.ff` e `code_post_gfx.ff` da instalacao anterior. Por isso, **nao copie os FastFiles traduzidos da V6 sobre esta instalacao** antes de reconstruir a traducao.
+
+Para adaptar as fontes publicas, a pessoa responsavel pelo projeto pode coletar os tres FastFiles dessa instalacao **sem alterar o jogo**:
+
+```bash
+curl -fL --retry 3 https://joa00fc.github.io/mw2-ptbr/coletar-base-limpa.py -o "$HOME/mw2-coletar.py" && python "$HOME/mw2-coletar.py"
+```
+
+O coletor e exclusivo da versao identificada pelo relatorio de diagnostico: falha se o hash nao corresponder. Gera o ZIP `/sdcard/Download/MW2_BASE_LIMPA_PARA_ADAPTAR_PTBR.zip` (aprox. 114 MB), com `common.ff`, `code_post_gfx.ff`, `patch.ff` e relatorio. **Este ZIP inclui dados proprietarios do jogo: NAO publique no GitHub nem coloque para download no site.** Compartilhe apenas em ambiente privado para adaptar a traducao. O pacote-fonte publico permanece separado.
+
+Depois de conferir a compatibilidade, criar o instalador de patches e testar novamente Team Player e as cutscenes, e que a instalacao pode ser demonstrada no video como pronta.
+
 ## Como usar no Android / Termux
 
 1. Feche o jogo e o GameHub completamente.
