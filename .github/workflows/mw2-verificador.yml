@@ -49,7 +49,7 @@ jobs:
               p=game/"zone"/"english"
               p.mkdir(parents=True)
               for name in ["common.ff","code_post_gfx.ff","patch.ff"]:
-                  (p/name).write_bytes(b"IWffu100"+struct.pack("<I",276)+bytes(15)+b"synthetic")
+                  (p/name).write_bytes(b"IWffu100"+struct.pack("<I",276)+bytes(200)+b"synthetic")
               before={x.name:hashlib.sha256(x.read_bytes()).hexdigest() for x in p.iterdir()}
               out=pathlib.Path(tmp)/"sample.zip"
               run=subprocess.run([sys.executable,"mw2-ptbr/coletar-base-limpa.py",
@@ -59,4 +59,37 @@ jobs:
               after={x.name:hashlib.sha256(x.read_bytes()).hexdigest() for x in p.iterdir()}
               assert before==after and not out.exists(), "Coletor modificou arquivos ou criou ZIP indevido"
               print("TESTE PASSOU: recusou arquivos diferentes e preservou jogo")
+          PY
+      - name: Testar ZIP criado e integridade dos tres arquivos
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import tempfile, pathlib, struct, sys, runpy, hashlib, zipfile, json
+          with tempfile.TemporaryDirectory() as tmp:
+              game=pathlib.Path(tmp)/"Call of Duty - Modern Warfare 2"
+              folder=game/"zone"/"english"
+              folder.mkdir(parents=True)
+              names=["common.ff","code_post_gfx.ff","patch.ff"]
+              for i,name in enumerate(names):
+                  (folder/name).write_bytes(b"IWffu100"+struct.pack("<I",276)+bytes([i+1])*240)
+              hashes={name:hashlib.sha256((folder/name).read_bytes()).hexdigest() for name in names}
+              ns=runpy.run_path("mw2-ptbr/coletar-base-limpa.py", run_name="unit_test")
+              ns["EXPECTED"].update(hashes)
+              out=pathlib.Path(tmp)/"collected.zip"
+              old=sys.argv
+              try:
+                  sys.argv=["coletar-base-limpa.py","--pasta",str(game),"--saida",str(out)]
+                  ns["main"]()
+              finally:
+                  sys.argv=old
+              with zipfile.ZipFile(out) as z:
+                  assert set(z.namelist()) >= {"base/"+n for n in names}
+                  for name in names:
+                      assert z.read("base/"+name)==(folder/name).read_bytes()
+                  meta=json.loads(z.read("RELATORIO_BASE_LIMPA.json"))
+                  assert len(meta["items"])==3
+                  assert not meta["changed_game_files"]
+              assert hashes=={name:hashlib.sha256((folder/name).read_bytes()).hexdigest() for name in names}
+              print("TESTE PASSOU: ZIP correto sem alterar originais")
           PY
