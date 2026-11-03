@@ -17,6 +17,20 @@ Somente os arquivos da versão testada do **Modern Warfare 2 de 2009 para PC**, 
 
 Não funciona em MW2 Remastered (2020), Modern Warfare II (2022), nem nas versões Xbox 360 ou recompilações de console.
 
+## Instalação limpa — primeira etapa sem modificações
+
+Antes de traduzir, abra **Team Player** diretamente na instalação nova, ainda sem mods. O erro *Disc read error* pode existir independentemente da tradução.
+
+Feche o GameHub, habilite o acesso ao armazenamento no Termux e rode (requer Python):
+
+```bash
+curl -fL --retry 3 https://joa00fc.github.io/mw2-ptbr/verificar-gamehub.py -o "$HOME/mw2-verificar.py" && python "$HOME/mw2-verificar.py"
+```
+
+O comando gera `/sdcard/Download/MW2_BASE_NOVA_RELATORIO.zip` contendo apenas hashes e inventário. Não envia nem altera dados do jogo e **não instala a tradução**. Confira o relatório antes de decidir que instalador é compatível.
+
+Veja o [roteiro do vídeo do JOA00FC](./tutorial-para-canal.md) e o [verificador](./verificar-gamehub.py).
+
 ## Como usar no Android / Termux
 
 1. Feche o jogo e o GameHub completamente.

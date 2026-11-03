@@ -1,0 +1,39 @@
+name: MW2 PT-BR - validar verificador
+on:
+  push:
+    paths:
+      - 'mw2-ptbr/verificar-gamehub.py'
+      - '.github/workflows/mw2-verificador.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Compilar sintaxe Python
+        run: python3 -m py_compile mw2-ptbr/verificar-gamehub.py
+      - name: Testar diagnostico em arquivos sinteticos
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import tempfile, pathlib, struct, subprocess, sys, zipfile, json, hashlib
+          with tempfile.TemporaryDirectory() as tmp:
+              p=pathlib.Path(tmp)/"Call of Duty - Modern Warfare 2"/"zone"/"english"
+              p.mkdir(parents=True)
+              for name in ["common.ff","code_post_gfx.ff","patch.ff","trainer.ff","roadkill.ff"]:
+                  (p/name).write_bytes(b"IWffu100"+struct.pack("<I",276)+bytes(9)+b"\x78\x9c"+"synthetic".encode())
+              before={x.name:hashlib.sha256(x.read_bytes()).hexdigest() for x in p.iterdir()}
+              report=pathlib.Path(tmp)/"report.zip"
+              subprocess.run([sys.executable,"mw2-ptbr/verificar-gamehub.py",
+                  "--pasta",str(p.parent.parent),"--saida",str(report)],check=True)
+              after={x.name:hashlib.sha256(x.read_bytes()).hexdigest() for x in p.iterdir()}
+              assert before==after
+              with zipfile.ZipFile(report) as z:
+                  data=json.loads(z.read("MW2_BASE_NOVA_RELATORIO.json"))
+                  assert len(data["files"])==5 and all(x["header_iw4"] for x in data["files"])
+                  assert data["translation_applied_by_this_tool"] is False
+              print("TESTE PASSOU: nenhum arquivo alterado")
+          PY
