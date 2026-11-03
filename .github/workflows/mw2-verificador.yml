@@ -3,6 +3,7 @@ on:
   push:
     paths:
       - 'mw2-ptbr/verificar-gamehub.py'
+      - 'mw2-ptbr/coletar-base-limpa.py'
       - '.github/workflows/mw2-verificador.yml'
   workflow_dispatch:
 permissions:
@@ -13,7 +14,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Compilar sintaxe Python
-        run: python3 -m py_compile mw2-ptbr/verificar-gamehub.py
+        run: python3 -m py_compile mw2-ptbr/verificar-gamehub.py mw2-ptbr/coletar-base-limpa.py
       - name: Testar diagnostico em arquivos sinteticos
         shell: bash
         run: |
@@ -36,4 +37,26 @@ jobs:
                   assert len(data["files"])==5 and all(x["header_iw4"] for x in data["files"])
                   assert data["translation_applied_by_this_tool"] is False
               print("TESTE PASSOU: nenhum arquivo alterado")
+          PY
+      - name: Garantir que coletor recuse arquivos desconhecidos sem alteracoes
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import tempfile, pathlib, struct, subprocess, sys, hashlib
+          with tempfile.TemporaryDirectory() as tmp:
+              game=pathlib.Path(tmp)/"Call of Duty - Modern Warfare 2"
+              p=game/"zone"/"english"
+              p.mkdir(parents=True)
+              for name in ["common.ff","code_post_gfx.ff","patch.ff"]:
+                  (p/name).write_bytes(b"IWffu100"+struct.pack("<I",276)+bytes(15)+b"synthetic")
+              before={x.name:hashlib.sha256(x.read_bytes()).hexdigest() for x in p.iterdir()}
+              out=pathlib.Path(tmp)/"sample.zip"
+              run=subprocess.run([sys.executable,"mw2-ptbr/coletar-base-limpa.py",
+                  "--pasta",str(game),"--saida",str(out)],capture_output=True,text=True)
+              assert run.returncode != 0, run.stdout
+              assert "base nao confere" in (run.stdout+run.stderr).lower()
+              after={x.name:hashlib.sha256(x.read_bytes()).hexdigest() for x in p.iterdir()}
+              assert before==after and not out.exists(), "Coletor modificou arquivos ou criou ZIP indevido"
+              print("TESTE PASSOU: recusou arquivos diferentes e preservou jogo")
           PY
