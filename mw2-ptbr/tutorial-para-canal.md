@@ -1,45 +1,37 @@
-# Roteiro para o canal JOA00FC: MW2 (2009) PT-BR no GameHub
+# MW2 (2009) PC — campanha PT-BR FINAL 1.0
 
-**Título sugerido:** MODERN WARFARE 2 (2009) EM PORTUGUÊS NO ANDROID | Tradução JOA00FC + GameHub
+Versão final no escopo acordado: textos revisados, sem recriar imagens e vídeos. Os textos instalados são os mesmos da versão 0.2 que você confirmou funcionar. Não foram acrescentadas novas traduções nesta consolidação. Quem já possui a 0.2 íntegra receberá confirmação de que a tradução já está presente.
 
-## Sequência da gravação
+## Instalação única no Termux
 
-1. **Abertura:** mostrar a campanha em português e apresentar o projeto como tradução independente, não oficial.
-2. **Jogo limpo:** mostrar a pasta `X360/Call of Duty - Modern Warfare 2`. Esclarecer que é MW2 (2009) **de PC**, e não Xbox 360 ou remasterizado.
-3. **Teste de integridade no jogo:** abrir *Team Player* diretamente pelo menu **Selecionar missão**, antes da tradução. Se aparecer *Disc read error*, interromper a instalação e reparar os arquivos.
-4. **Termux:** conceder acesso ao armazenamento e instalar Python, se necessário, com `pkg install python`.
-5. **Verificação:** fechar o GameHub, colar o comando abaixo e mostrar o relatório `Download/MW2_BASE_NOVA_RELATORIO.zip`.
-6. **Projeto no GitHub:** mostrar o site e o pacote-fonte disponível. Explicar que ele **não** contém os arquivos `.ff` originais nem o jogo.
-7. **Instalação da tradução:** gravar a substituição **somente depois de validar a nova base e testar o processo de reconstrução**. Demonstrar backup, restaurar e testar *Team Player*, textos de menus e cutscenes.
-8. **Encerramento:** apontar para o site e pedir que reportem erros com missão e captura.
+Feche o jogo. Salve MW2_PTBR_CAMPANHA_FINAL_1.0.zip em Download. Execute, sem extrair o ZIP:
 
-## Comando único de verificação
-
-```bash
-curl -fL --retry 3 https://joa00fc.github.io/mw2-ptbr/verificar-gamehub.py -o "$HOME/mw2-verificar.py" && python "$HOME/mw2-verificar.py"
+```sh
+python ~/storage/downloads/MW2_PTBR_CAMPANHA_FINAL_1.0.zip --game "/storage/emulated/0/X360/Call of Duty - Modern Warfare 2" --action install
 ```
 
-Este é um **verificador**, não um instalador automático. Não altera arquivos nem baixa o jogo.
+Mantenha o Termux aberto até a confirmação. Não apague nem restaure a versão anterior antes. O instalador aceita a base original verificada, a 0.1 e a 0.2 deste projeto, preservando os backups originais. Ele verifica os hashes e reconstrói apenas o necessário. Reserve aproximadamente 4 GB adicionais em uma instalação limpa; o espaço mínimo é calculado antes de gravar. Para quem já tem a 0.2, os arquivos traduzidos não precisam ser reconstruídos.
 
-## Descrição sugerida para o vídeo
+Use o caminho real da pasta que contém iw4sp.exe se ele for diferente do exemplo. O nome X360 da pasta não muda o alvo: esta tradução é para o jogo PC, não para os arquivos de Xbox 360.
 
-Projeto de tradução PT-BR independente de Call of Duty: Modern Warfare 2 (2009) para PC, testado no GameHub para Android. Inclui tradução de menus, objetivos e legendas, inclusive cinematográficas. O pacote público atual é de fontes; a instalação universal está em beta e depende de confirmar a versão do jogo.
+Python já foi instalado no seu aparelho. Em uma configuração nova do Termux, execute termux-setup-storage, conceda acesso aos arquivos e instale Python com pkg install -y python.
 
-Página oficial: https://joa00fc.github.io/mw2-ptbr/
-Fontes e documentação: https://github.com/JOA00FC/JOA00FC.github.io/tree/main/mw2-ptbr
-Canal: https://youtube.com/@JOA00FC
+## Restaurar ou verificar
 
-A tradução não inclui cópia do jogo nem FastFiles proprietários.
+Execute o mesmo ZIP sem --action install para abrir o menu: 1 instalar, 2 restaurar originais, 3 verificar, 4 sair.
 
-## Etapa de manutencao (somente autor do projeto)
+Os backups ficam em MW2_PTBR_BACKUP_01, dentro da pasta do jogo. Não apague essa pasta. O instalador final restaura os 24 arquivos abrangidos; o pacote antigo 0.1 conhece apenas dois deles. Bases desconhecidas e backups alterados são recusados. Falhas tratadas acionam reversão. Se o processo for encerrado abruptamente, mantenha o backup e execute novamente antes de abrir o jogo.
 
-A instalacao limpa do GameHub carregou Team Player normalmente. Os hashes de `common.ff` e `code_post_gfx.ff` diferem da base usada na V6 anterior. Antes de gravar uma instalacao completa para o YouTube, reconstruiremos a traducao sobre os arquivos novos.
+## Conteúdo
 
-Comando do coletor (somente para quem mantem o projeto):
+Menus e opções, objetivos, instruções, HUD textual, legendas de diálogos, nomes de missões, armas e acessórios, mensagens de erro e inicialização, créditos e legendas externas dos vídeos de carregamento. São 5.912 entradas revisadas, das quais 5.085 foram alteradas. Nomes próprios, símbolos e números podem permanecer iguais após revisão.
 
-```bash
-curl -fL --retry 3 https://joa00fc.github.io/mw2-ptbr/coletar-base-limpa.py -o "$HOME/mw2-coletar.py" && python "$HOME/mw2-coletar.py"
-```
+Ative Legendas nas opções. O idioma-base continua English e os FastFiles permanecem em zone/english. Não copie os deltas da pasta payload para o jogo: o instalador é quem reconstrói os arquivos.
 
-O ZIP criado em Download contem arquivos proprietarios do jogo. **Nao publicar este ZIP ou os FastFiles completos no GitHub nem no site.** O download publico deve continuar sendo o pacote-fonte da traducao ou, no futuro, patches diferenciais aplicaveis aos arquivos de cada jogador.
+## O que permanece original
 
+Áudio; texto desenhado nas imagens do HUD (por exemplo YOU, AMMO e TARGET); texto gravado dentro dos vídeos; placas e demais texturas. Multiplayer e SpecOps não são o objetivo desta tradução. As 1.422 chaves não traduzidas estão listadas em RELATORIO_TEXTOS.json, incluindo conteúdo de outros modos, legado e entradas vazias. Não foi comprovado que nenhuma delas possa aparecer dinamicamente na campanha.
+
+Nenhum executável, save, driver ou ajuste de desempenho é instalado. Os recursos não textuais dos FastFiles são reaproveitados; consulte VALIDACAO.json para o escopo das comparações técnicas anteriores. Os testes do pacote final estão em TESTES_FINAIS.json. A confirmação do usuário é da base 0.2; não há registro de teste de todas as missões.
+
+Base específica: PC IW4, executável 1.1.0.1525 e hashes da instalação fornecida. Confira COBERTURA.md e EXEMPLOS_NO_JOGO.md. Esta entrega encerra o escopo aceito; não afirma cobertura universal de todos os textos possíveis.

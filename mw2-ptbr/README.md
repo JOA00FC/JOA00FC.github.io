@@ -1,92 +1,43 @@
-# Call of Duty: Modern Warfare 2 (2009) — Tradução PT-BR JOA00FC
+# MW2 (2009) PC — campanha PT-BR FINAL 1.0
 
-Tradução comunitária de legendas, menus, objetivos e cutscenes para a **versão de PC (IW4)**, testada pelo criador no **GameHub (Android/POCO F7)**. Projeto independente e não oficial.
+Versão final no escopo acordado: textos revisados, sem recriar imagens e vídeos. Os textos instalados são os mesmos da versão 0.2 que você confirmou funcionar. Não foram acrescentadas novas traduções nesta consolidação. Quem já possui a 0.2 íntegra receberá confirmação de que a tradução já está presente.
 
-## O que este pacote inclui
+## Instalação única no Termux
 
-- Arquivo `sobreposicoes.json` com os textos em português para `common.ff`, `code_post_gfx.ff` e `patch.ff`.
-- `subtitles.csv` com falas das cutscenes e seus horários.
-- `REBUILD.py`: reconstrutor offline, com verificação rigorosa de SHA-256, backup e restauração. Precisa dos arquivos originais do usuário e OpenAssetTools 0.34.0.
-- `instalar-termux.sh`: valida o jogo, baixa as fontes e oferece restauração. A reconstrução integral no Termux **ainda não foi homologada** para distribuição pública em um único clique.
+Feche o jogo. Salve MW2_PTBR_CAMPANHA_FINAL_1.0.zip em Download. Execute, sem extrair o ZIP:
 
-O pacote **não contém FastFiles completos, o jogo, executáveis proprietários ou arquivos `.bik`**. O usuário precisa ter uma cópia legítima de MW2 PC.
-
-## Compatibilidade
-
-Somente os arquivos da versão testada do **Modern Warfare 2 de 2009 para PC**, nas localizações `zone/english/common.ff`, `zone/english/code_post_gfx.ff` e `zone/english/patch.ff`. O script bloqueia versões com SHA-256 diferentes.
-
-Não funciona em MW2 Remastered (2020), Modern Warfare II (2022), nem nas versões Xbox 360 ou recompilações de console.
-
-## Instalação limpa — primeira etapa sem modificações
-
-Antes de traduzir, abra **Team Player** diretamente na instalação nova, ainda sem mods. O erro *Disc read error* pode existir independentemente da tradução.
-
-Feche o GameHub, habilite o acesso ao armazenamento no Termux e rode (requer Python):
-
-```bash
-curl -fL --retry 3 https://joa00fc.github.io/mw2-ptbr/verificar-gamehub.py -o "$HOME/mw2-verificar.py" && python "$HOME/mw2-verificar.py"
+```sh
+python ~/storage/downloads/MW2_PTBR_CAMPANHA_FINAL_1.0.zip --game "/storage/emulated/0/X360/Call of Duty - Modern Warfare 2" --action install
 ```
 
-O comando gera `/sdcard/Download/MW2_BASE_NOVA_RELATORIO.zip` contendo apenas hashes e inventário. Não envia nem altera dados do jogo e **não instala a tradução**. Confira o relatório antes de decidir que instalador é compatível.
+Mantenha o Termux aberto até a confirmação. Não apague nem restaure a versão anterior antes. O instalador aceita a base original verificada, a 0.1 e a 0.2 deste projeto, preservando os backups originais. Ele verifica os hashes e reconstrói apenas o necessário. Reserve aproximadamente 4 GB adicionais em uma instalação limpa; o espaço mínimo é calculado antes de gravar. Para quem já tem a 0.2, os arquivos traduzidos não precisam ser reconstruídos.
 
-Veja o [roteiro do vídeo do JOA00FC](./tutorial-para-canal.md) e o [verificador](./verificar-gamehub.py).
+Use o caminho real da pasta que contém iw4sp.exe se ele for diferente do exemplo. O nome X360 da pasta não muda o alvo: esta tradução é para o jogo PC, não para os arquivos de Xbox 360.
 
-## Atualizacao do projeto pelo autor — nova base limpa
+Python já foi instalado no seu aparelho. Em uma configuração nova do Termux, execute termux-setup-storage, conceda acesso aos arquivos e instale Python com pkg install -y python.
 
-Em 03/11/2026, o MW2 foi reinstalado no GameHub e **Team Player carregou normalmente sem traducao**. A base nova nao tem os mesmos hashes de `common.ff` e `code_post_gfx.ff` da instalacao anterior. Por isso, **nao copie os FastFiles traduzidos da V6 sobre esta instalacao** antes de reconstruir a traducao.
+## Restaurar ou verificar
 
-Para adaptar as fontes publicas, a pessoa responsavel pelo projeto pode coletar os tres FastFiles dessa instalacao **sem alterar o jogo**:
+Execute o mesmo ZIP sem --action install para abrir o menu: 1 instalar, 2 restaurar originais, 3 verificar, 4 sair.
 
-```bash
-curl -fL --retry 3 https://joa00fc.github.io/mw2-ptbr/coletar-base-limpa.py -o "$HOME/mw2-coletar.py" && python "$HOME/mw2-coletar.py"
-```
+Os backups ficam em MW2_PTBR_BACKUP_01, dentro da pasta do jogo. Não apague essa pasta. O instalador final restaura os 24 arquivos abrangidos; o pacote antigo 0.1 conhece apenas dois deles. Bases desconhecidas e backups alterados são recusados. Falhas tratadas acionam reversão. Se o processo for encerrado abruptamente, mantenha o backup e execute novamente antes de abrir o jogo.
 
-O coletor e exclusivo da versao identificada pelo relatorio de diagnostico: falha se o hash nao corresponder. Gera o ZIP `/sdcard/Download/MW2_BASE_LIMPA_PARA_ADAPTAR_PTBR.zip` (aprox. 114 MB), com `common.ff`, `code_post_gfx.ff`, `patch.ff` e relatorio. **Este ZIP inclui dados proprietarios do jogo: NAO publique no GitHub nem coloque para download no site.** Compartilhe apenas em ambiente privado para adaptar a traducao. O pacote-fonte publico permanece separado.
+## Conteúdo
 
-Depois de conferir a compatibilidade, criar o instalador de patches e testar novamente Team Player e as cutscenes, e que a instalacao pode ser demonstrada no video como pronta.
+Menus e opções, objetivos, instruções, HUD textual, legendas de diálogos, nomes de missões, armas e acessórios, mensagens de erro e inicialização, créditos e legendas externas dos vídeos de carregamento. São 5.912 entradas revisadas, das quais 5.085 foram alteradas. Nomes próprios, símbolos e números podem permanecer iguais após revisão.
 
-## Como usar no Android / Termux
+Ative Legendas nas opções. O idioma-base continua English e os FastFiles permanecem em zone/english. Não copie os deltas da pasta payload para o jogo: o instalador é quem reconstrói os arquivos.
 
-1. Feche o jogo e o GameHub completamente.
-2. Instale o Termux de fonte confiável e conceda acesso ao armazenamento usando `termux-setup-storage`.
-3. Rode:
+## O que permanece original
 
-```bash
-curl -fsSL https://joa00fc.github.io/mw2-ptbr/instalar-termux.sh -o $HOME/mw2-ptbr.sh && bash $HOME/mw2-ptbr.sh --verificar
-```
+Áudio; texto desenhado nas imagens do HUD (por exemplo YOU, AMMO e TARGET); texto gravado dentro dos vídeos; placas e demais texturas. Multiplayer e SpecOps não são o objetivo desta tradução. As 1.422 chaves não traduzidas estão listadas em RELATORIO_TEXTOS.json, incluindo conteúdo de outros modos, legado e entradas vazias. Não foi comprovado que nenhuma delas possa aparecer dinamicamente na campanha.
 
-Essa primeira etapa **apenas verifica** a base; não substitui arquivos. O modo automático de compilação em Android depende de runtime Linux x86 e permanece experimental. Nunca force manualmente um arquivo `.ff` incompatível.
+Nenhum executável, save, driver ou ajuste de desempenho é instalado. Os recursos não textuais dos FastFiles são reaproveitados; consulte VALIDACAO.json para o escopo das comparações técnicas anteriores. Os testes do pacote final estão em TESTES_FINAIS.json. A confirmação do usuário é da base 0.2; não há registro de teste de todas as missões.
 
-## Linux PC (reconstrução avançada)
+Base específica: PC IW4, executável 1.1.0.1525 e hashes da instalação fornecida. Confira COBERTURA.md e EXEMPLOS_NO_JOGO.md. Esta entrega encerra o escopo aceito; não afirma cobertura universal de todos os textos possíveis.
 
-1. Baixe o ZIP deste projeto e extraia-o.
-2. Baixe **OpenAssetTools v0.34.0** da [página oficial](https://github.com/Laupetin/OpenAssetTools/releases/tag/v0.34.0). O executável Linux atual é 32 bits: requer runtime i386 apropriado.
-3. Confira os arquivos com:
+## Download público
 
-```bash
-python3 REBUILD.py --pasta '/caminho/Call of Duty - Modern Warfare 2' --verificar
-```
+[Baixar versão final 1.0](https://joa00fc.github.io/mw2-ptbr/download/MW2_PTBR_CAMPANHA_FINAL_1.0.zip)
 
-4. Para reconstruir e instalar, após criar backup do jogo, execute:
-
-```bash
-python3 REBUILD.py --pasta '/caminho/Call of Duty - Modern Warfare 2' --oat '/caminho/ao/OpenAssetTools' --instalar
-```
-
-O script compara o SHA-256 de **todos os arquivos de saída** com a versão validada; qualquer divergência interrompe a instalação antes de substituir os `.ff`. O procedimento de reconstrução a partir de originais ainda está marcado como **beta**; não está homologado como instalador público universal.
-
-Restauração, se o instalador tiver concluído e gerado os backups:
-
-```bash
-python3 REBUILD.py --pasta '/caminho/Call of Duty - Modern Warfare 2' --restaurar
-```
-
-## Arquivos e distribuição
-
-Não fornecemos `common.ff`, `code_post_gfx.ff`, `patch.ff` nem o jogo. Para compartilhar a tradução, publique este pacote-fonte, não os FastFiles completos.
-
-**Criador e testes:** JOA00FC, em colaboração com ChatGPT e ferramentas comunitárias. **Ferramenta usada:** [OpenAssetTools](https://github.com/Laupetin/OpenAssetTools), projeto independente e com licença própria.
-
-**Status:** Funcionou em português no GameHub no teste do criador, com correção do limite de 7.000 textos e legendas das cinematográficas. Esse relato não valida automaticamente todas as versões e não constitui revisão individual de todas as frases.
-
-**Contato:** [canal JOA00FC no YouTube](https://youtube.com/@JOA00FC).
+SHA-256: `46c988fb84eb89234c3cee68e21d84977de209517cb81fee2dc93e96d93f5bdd`
