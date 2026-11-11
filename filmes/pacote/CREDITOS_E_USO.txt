@@ -1,0 +1,38 @@
+JOA00FC FILM — Versão 1.0
+11 de novembro de 2026
+
+CRÉDITOS
+Conceito, direção e publicação: João / JOA00FC.
+Desenvolvimento técnico dos presets, LUTs e documentação: com auxílio do ChatGPT.
+Crédito resumido: “JOA00FC — desenvolvido com auxílio do ChatGPT”.
+Página oficial: https://joa00fc.github.io/filmes/
+
+CONDIÇÕES DE USO DO PACOTE
+Disponibilizado pelo JOA00FC para uso gratuito em fotografias e vídeos próprios,
+incluindo publicações pessoais, conteúdo monetizado e trabalhos para clientes.
+É permitido ajustar a intensidade e as configurações para esses usos.
+Não é necessário creditar o filtro em cada foto ou vídeo; o crédito é bem-vindo.
+
+Os arquivos do pacote não são oferecidos para revenda, redistribuição avulsa,
+inclusão em outros pacotes de presets ou apresentação como criação de terceiros.
+Para compartilhar, encaminhe o link da página oficial do JOA00FC.
+Outras formas de distribuição dependem de autorização do JOA00FC.
+
+Os créditos e condições referem-se aos arquivos e à identidade deste pacote.
+As fotografias e os vídeos tratados continuam pertencendo aos seus respectivos
+titulares; usar o filtro não transfere direitos sobre essas imagens.
+ChatGPT é identificado como ferramenta de auxílio, não como cotitular de direitos.
+Estas condições não representam registro autoral nem garantem exclusividade
+sobre uma estética visual, parâmetros de cor ou material gerado com IA.
+
+ORIGEM E MARCAS
+Design independente, criado a partir de parâmetros próprios. Não contém
+arquivos, código ou texturas extraídos do efeito OLD_MOVIE do Instagram.
+Não há afiliação, endosso ou participação do criador daquele efeito.
+Adobe, Lightroom, Premiere, Instagram, LumaFusion e ChatGPT são nomes de
+seus respectivos titulares e aparecem apenas para identificação.
+
+COMPATIBILIDADE
+Os arquivos são fornecidos conforme disponibilizados. A aparência depende da
+imagem de origem, perfil de câmera, aplicativo e gerenciamento de cor.
+Consulte LEIA_PRIMEIRO.txt para os formatos e as verificações realizadas.

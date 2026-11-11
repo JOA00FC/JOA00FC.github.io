@@ -1,0 +1,97 @@
+JOA00FC FILM — COLOR SOFT / MONO SOFT
+Versão 1.0 • 11 de novembro de 2026
+JOA00FC — desenvolvido com auxílio do ChatGPT
+
+DOIS VISUAIS
+Color Soft: filme colorido suave, calor discreto nos tons médios, saturação
+contida e curva com pretos levemente elevados e brancos suaves.
+Mono Soft: preto e branco neutro, gradação suave e contraste moderado.
+São criações próprias inspiradas na atmosfera de película antiga; não são
+uma cópia exata nem contêm arquivos do efeito OLD_MOVIE do Instagram.
+
+QUAL ARQUIVO USAR
+01_LIGHTROOM_XMP: os dois presets para fotografias no Adobe Lightroom.
+02_LUT_VIDEO/33: as duas LUTs .cube, leves e indicadas para começar no celular.
+02_LUT_VIDEO/65: as mesmas duas cores em tabelas de maior resolução, para
+editores que aceitam 65 pontos. Não são versões mais fortes.
+As LUTs também podem ser usadas em fotos em editores com suporte a .cube.
+
+LIGHTROOM NO ANDROID
+1. Extraia o ZIP no gerenciador de arquivos do celular.
+2. Abra uma foto no Lightroom e entre em Predefinições/Presets.
+3. Toque no menu de três pontos > Importar predefinições.
+4. Selecione os dois arquivos .xmp da pasta 01_LIGHTROOM_XMP.
+5. Procure o grupo JOA00FC Film na aba Suas/Yours (ou Predefinições do usuário).
+6. Aplique Color Soft ou Mono Soft. Comece na intensidade 100; se preferir
+   mais discreto, experimente 60–80 no controle Quantidade, quando disponível.
+
+No Lightroom para computador, use a opção de importar perfis/predefinições.
+Não importe .cube no painel de predefinições do Lightroom: use os .xmp.
+Não renomeie .xmp para .dng; são formatos diferentes.
+
+O preset não fixa exposição, balanço de branco, recorte, correção de lente,
+perfil de câmera ou nitidez. Ajuste a exposição e a temperatura da sua foto
+antes de aplicar. RAWs dependem do perfil de câmera escolhido.
+O XMP inclui granulação suave e vinheta discreta. Para removê-las, zere
+Granulação e Vinheta no painel Efeitos. Não há máscaras de IA.
+
+VÍDEOS NO LIGHTROOM
+É possível aplicar presets a vídeos, mas só os ajustes compatíveis com vídeo
+serão usados. A disponibilidade pode variar com a versão e o plano do app.
+Para um resultado de cor reproduzível entre editores de vídeo, prefira .cube.
+
+LUMAFUSION NO ANDROID — LUT .CUBE
+1. Importe seu vídeo e abra o editor Color & Effects / Cor e efeitos.
+2. Use Importar e selecione um dos arquivos .cube da pasta 33.
+3. Aplique a LUT ao clipe. Comece em intensidade total: o visual já é suave.
+4. Na colorida, reduza a mistura/intensidade se desejar.
+5. Na Mono, mantenha 100% para preto e branco puro. Misturar com o original
+   pode devolver parte das cores; ajuste contraste/exposição em vez disso.
+O LumaFusion é um app pago; confira o preço na loja antes de comprar.
+
+ADOBE PREMIERE NO COMPUTADOR
+Em Lumetri Color > Creative/Criativo > Look > Browse/Procurar, selecione
+uma LUT .cube. Aplique depois da correção/conversão técnica de cor.
+Outros editores precisam aceitar a importação de LUT 3D .cube de 33 ou 65 pontos.
+
+PARA NÃO ESTOURAR AS CORES
+• As LUTs esperam imagem SDR já normalizada em Rec.709/display RGB.
+• Para fotos, use uma base sRGB normalizada em editor compatível.
+• Log, HLG, PQ e HDR precisam de conversão/tone mapping para SDR antes da LUT.
+• Corrija exposição e balanço de branco antes do filtro. Não empilhe filtros.
+• Uma LUT não recupera detalhe que já estava estourado na captura original.
+• No seu vídeo de referência, os metadados indicam BT.709/SDR.
+• Na exportação, mantenha o gerenciamento de cor e as etiquetas coerentes
+  com o projeto (ex.: vídeo Rec.709), para evitar mudança de brilho.
+
+TEXTURA NOS VÍDEOS
+LUTs alteram cor; não armazenam granulação, vinheta ou movimento.
+Para complementar, adicione granulação fina e vinheta suave no seu editor,
+depois da LUT. Use pouca intensidade; as escalas variam entre os aplicativos.
+As prévias particulares foram renderizadas com a LUT 65, vinheta suave e
+ruído monocromático discreto. São prévias de vídeo, não renders do Lightroom.
+Não foram acrescentados riscos, poeira ou tremulação: a proposta é sutil.
+
+VALIDAÇÃO E LIMITES
+LUTs: estrutura, ordem RGB, tamanho, finitude, rampa tonal crescente e limites
+numéricos verificados; aplicação real testada no FFmpeg com sua gravação.
+As LUTs preservam uma margem nos extremos de saída, sem clipping novo no
+domínio RGB normalizado. Isso não corrige uma entrada já superexposta.
+XMP: XML, identificadores e campos de preset validados; a importação e a
+aparência dentro do Lightroom ainda não foram testadas neste ambiente.
+XMP e LUT têm a mesma direção visual, mas usam renderizadores diferentes:
+não prometem resultados idênticos pixel a pixel, nem em toda iluminação.
+
+CRÉDITOS, CONDIÇÕES DE USO E HASHES
+Leia CREDITOS_E_USO.txt. SHA256SUMS.txt lista os arquivos do pacote.
+Página oficial: https://joa00fc.github.io/filmes/
+
+DOCUMENTAÇÃO OFICIAL CONSULTADA
+Adobe — importar presets no celular:
+https://helpx.adobe.com/lightroom/mobile/work-with-presets/import-and-export-presets.html
+Adobe — presets em vídeos:
+https://helpx.adobe.com/lightroom/mobile/edit-videos/apply-presets-to-videos.html
+LumaTouch — importar LUTs no Android/iOS:
+https://luma-touch.helpscoutdocs.com/article/44-how-do-i-imports-luts-cube-and-3dl-files-into-lumafusion
+Adobe — LUTs no Premiere:
+https://helpx.adobe.com/premiere/desktop/correct-color/add-color-effects/add-look-up-tables.html

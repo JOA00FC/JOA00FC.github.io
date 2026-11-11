@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>JOA00FC Film — presets suaves para fotos e vídeos</title>
+  <meta name="description" content="Color Soft e Mono Soft: dois visuais de filme discretos. Presets XMP para Lightroom e LUTs CUBE para vídeo. Downloads, instalação e créditos.">
+  <meta name="theme-color" content="#131211">
+  <link rel="canonical" href="https://joa00fc.github.io/filmes/">
+  <link rel="stylesheet" href="film.css">
+</head>
+<body>
+  <a class="skip" href="#conteudo">Pular para o conteúdo</a>
+  <header><a class="brand" href="/">JOA00FC<span>FILM LAB</span></a><nav aria-label="Navegação"><a href="#downloads">Downloads</a><a href="#instalar">Instalar</a><a href="#creditos">Créditos</a></nav></header>
+  <main id="conteudo">
+    <section class="hero wrap">
+      <div class="hero-copy"><p class="eyebrow">JOA00FC FILM / VOL. 01</p><h1>Memória,<br>com leveza<span>.</span></h1><p class="intro">A atmosfera de um filme antigo, com cores contidas e contraste suave. Dois visuais para as histórias que você fotografa e grava.</p><div class="actions"><a class="button primary" href="download/JOA00FC_Film_1.0.zip" download>Baixar coleção <span aria-hidden="true">↓</span></a><a class="button" href="#previa">Testar com uma foto</a></div><p class="micro">2 visuais · XMP + CUBE · versão 1.0</p></div>
+      <div class="film-art" aria-hidden="true"><div class="frame warm"><span>01 / COLOR SOFT</span><div class="disc"></div><b>Uma luz<br>mais quente.</b></div><div class="frame mono"><span>02 / MONO SOFT</span><div class="disc"></div><b>O essencial,<br>em cinza.</b></div><p>DUAS INTERPRETAÇÕES. A MESMA CALMA.</p></div>
+    </section>
+    <div class="strip"><span>CORES CONTIDAS</span><span>PRETOS SUAVES</span><span>CALOR DISCRETO</span><span>SEM EXAGEROS</span></div>
+    <section class="wrap section looks" aria-labelledby="looks-title">
+      <div><p class="eyebrow">01 / A COLEÇÃO</p><h2 id="looks-title">Caráter de filme.<br>Espaço para a sua imagem.</h2></div>
+      <div class="look-grid"><article><span class="number">01</span><h3>Color Soft</h3><p>Calor discreto nos tons médios, cores ligeiramente dessaturadas e uma curva delicada. Um toque nostálgico que respeita a cena.</p><span class="tag">COLORIDO SUAVE</span></article><article><span class="number">02</span><h3>Mono Soft</h3><p>Preto e branco neutro, gradações contínuas e contraste moderado. Sem sépia e sem sombras excessivamente fechadas.</p><span class="tag">PRETO E BRANCO</span></article></div>
+    </section>
+    <section id="previa" class="wrap section">
+      <p class="eyebrow">02 / EXPERIMENTE</p><div class="section-head"><h2>A sua foto.<br>Um novo clima.</h2><p>Escolha uma foto SDR para comparar as cores. O processamento acontece neste navegador, sem enviar sua imagem.</p></div>
+      <div class="preview-tool">
+        <div class="preview-stage"><canvas id="preview" width="1000" height="600" aria-label="Prévia de cor. A imagem inicial é uma cartela demonstrativa."></canvas><span id="preview-label">Cartela de cores · original</span></div>
+        <div class="controls"><label class="button file-label" for="photo">Escolher foto<input id="photo" type="file" accept="image/jpeg,image/png,image/webp"></label><div class="segmented" role="group" aria-label="Visual da prévia"><button type="button" data-look="original" aria-pressed="true">Original</button><button type="button" data-look="color" aria-pressed="false">Color Soft</button><button type="button" data-look="mono" aria-pressed="false">Mono Soft</button></div><button class="reset" id="reset" type="button">Usar cartela</button></div>
+        <p class="micro" id="preview-status" role="status">Prévia da transformação de cor das LUTs, sem granulação ou vinheta. Não simula o renderizador do Lightroom.</p>
+      </div>
+    </section>
+    <section id="downloads" class="wrap section">
+      <p class="eyebrow">03 / LEVE COM VOCÊ</p><h2>Escolha o seu formato.</h2><p class="lead">A coleção completa inclui os dois presets, quatro LUTs, guia de instalação, créditos e hashes de verificação.</p>
+      <div class="download-grid">
+        <article class="download featured"><span class="tag">COLEÇÃO COMPLETA</span><h3>JOA00FC Film 1.0</h3><p>Color Soft + Mono Soft.<br>Tudo em um único arquivo.</p><a class="button primary" href="download/JOA00FC_Film_1.0.zip" download>Baixar ZIP completo ↓</a></article>
+        <article class="download"><span class="tag">FOTOGRAFIA</span><h3>Lightroom</h3><p>2 presets XMP.<br>Incluem granulação e vinheta suaves.</p><a class="button" href="download/JOA00FC_Film_Lightroom_1.0.zip" download>Baixar presets XMP ↓</a></article>
+        <article class="download"><span class="tag">VÍDEO / COR</span><h3>LUTs CUBE</h3><p>33 pontos para começar no celular. 65 pontos para editores compatíveis; a intensidade é a mesma.</p><div class="download-links"><a href="download/JOA00FC_Film_LUT33_1.0.zip" download>Baixar 33 pontos ↓</a><a href="download/JOA00FC_Film_LUT65_1.0.zip" download>Baixar 65 pontos ↓</a></div></article>
+      </div>
+      <div class="notice"><strong>Preparado para SDR.</strong> As LUTs esperam vídeo Rec.709 ou imagem display RGB normalizada. Converta Log, HLG ou PQ/HDR antes de aplicar. O filtro não recupera detalhes já estourados na gravação.</div>
+    </section>
+    <section id="instalar" class="wrap section">
+      <p class="eyebrow">04 / EM POUCOS PASSOS</p><h2>Instale. Aplique. Ajuste.</h2>
+      <div class="instructions">
+        <article><h3>Lightroom no celular</h3><ol><li>Baixe e extraia o ZIP.</li><li>Abra uma foto e entre em <strong>Predefinições / Presets</strong>.</li><li>No menu de três pontos, escolha <strong>Importar predefinições</strong> e selecione os dois arquivos <strong>.xmp</strong>.</li><li>Na aba <strong>Suas / Yours</strong>, procure o grupo <strong>JOA00FC Film</strong> e aplique um visual.</li></ol><p>Comece em 100. Para uma versão ainda mais discreta, experimente Quantidade 60–80, quando disponível. Exposição, balanço de branco e recorte ficam por sua conta.</p><a class="text-link" href="https://helpx.adobe.com/lightroom/mobile/work-with-presets/import-and-export-presets.html">Guia oficial da Adobe ↗</a></article>
+        <article><h3>LumaFusion no Android</h3><ol><li>Extraia o ZIP e importe seu vídeo no editor.</li><li>Abra <strong>Color &amp; Effects / Cor e efeitos</strong> e use <strong>Importar</strong>.</li><li>Selecione uma LUT <strong>.cube</strong> de 33 pontos e aplique ao clipe.</li><li>Ajuste a intensidade da colorida. Na Mono, mantenha 100% para preto e branco puro.</li></ol><p>O LumaFusion é pago. As LUTs também servem em outros editores que importam CUBE. No Premiere, use Lumetri Color → Criativo → Look → Procurar.</p><a class="text-link" href="https://luma-touch.helpscoutdocs.com/article/44-how-do-i-imports-luts-cube-and-3dl-files-into-lumafusion">Guia oficial da LumaTouch ↗</a></article>
+      </div>
+      <details><summary>Fotos e vídeos terão exatamente o mesmo resultado?</summary><p>Os XMP e as LUTs seguem a mesma direção visual, mas usam implementações diferentes. Perfis de câmera, iluminação e gerenciamento de cor também influenciam o resultado. As prévias desta página mostram apenas as cores das LUTs.</p></details>
+      <details><summary>O que acontece com a granulação e a vinheta?</summary><p>Os presets XMP incluem os dois efeitos em intensidade discreta. As LUTs CUBE contêm apenas a transformação de cor; acrescente granulação fina e vinheta suave no editor se desejar. Não há riscos, poeira ou tremulação embutidos.</p></details>
+      <details><summary>Posso usar os presets em vídeos no Lightroom?</summary><p>O Lightroom aplica a vídeos somente os ajustes compatíveis. A disponibilidade depende da versão e do plano do aplicativo. Consulte <a href="https://helpx.adobe.com/lightroom/mobile/edit-videos/apply-presets-to-videos.html">a documentação da Adobe</a>. Para transferência de cor entre editores de vídeo, use as LUTs.</p></details>
+      <details><summary>O que já foi verificado?</summary><p>As LUTs foram aplicadas a uma gravação SDR real no FFmpeg e verificadas quanto a estrutura, ordem RGB, gradação e limites numéricos. Os XMP passaram por validação de XML e campos; a importação e a aparência dentro do Lightroom ainda não foram testadas neste ambiente.</p></details>
+    </section>
+    <section id="creditos" class="wrap section credits">
+      <div><p class="eyebrow">05 / FEITO PARA CRIAR</p><h2>JOA00FC Film.</h2><p class="byline">JOA00FC — desenvolvido com auxílio do ChatGPT.</p><p>Conceito, direção e publicação: João / JOA00FC.<br>Desenvolvimento técnico: com auxílio do ChatGPT.</p></div>
+      <div><h3>Créditos e uso</h3><p>Uso gratuito em suas fotos e vídeos, inclusive conteúdo monetizado e trabalhos para clientes. O crédito nas publicações é bem-vindo, mas não obrigatório.</p><p>Não revenda nem redistribua os arquivos como outro pacote ou como criação de terceiros. Para compartilhar, envie o link desta página. Outros usos dos arquivos dependem de autorização do JOA00FC.</p><p>Design independente inspirado na atmosfera de película antiga, sem arquivos extraídos do efeito OLD_MOVIE e sem vínculo com seu criador. ChatGPT é a ferramenta de auxílio, não cotitular de direitos.</p><a class="text-link" href="pacote/CREDITOS_E_USO.txt">Ler condições completas ↗</a><p class="micro">Versão 1.0 · 11/11/2026. Os créditos não constituem registro autoral nem garantem exclusividade sobre uma estética visual.</p></div>
+    </section>
+  </main>
+  <footer class="wrap"><a class="brand" href="/">JOA00FC</a><p>Filme suave. Histórias suas.</p><a href="/#downloads">Voltar ao site ↗</a></footer>
+  <script src="preview.js" defer></script>
+</body>
+</html>
