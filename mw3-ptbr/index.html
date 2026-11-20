@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="pt-BR"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#101011">
+<meta name="description" content="Tradução brasileira JOA00FC de Call of Duty: Modern Warfare 3 (2011) para PC, com instalação pelo Termux, tutorial e uso no GameHub.">
+<title>MW3 2011 — Tradução PT-BR | JOA00FC</title>
+<link rel="icon" href="../assets/perfil.png">
+<style>
+:root{color-scheme:dark;--bg:#0c0b0c;--panel:#171517;--line:#423031;--red:#e63b38;--text:#f7f3f1;--muted:#bcb4b4}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(ellipse at 80% -20%,#48141e 0,transparent 50%),var(--bg);color:var(--text);font:16px/1.65 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}a{color:inherit}a:hover{color:#ffb9b7}
+header{display:flex;gap:20px;align-items:center;justify-content:space-between;padding:20px clamp(20px,6vw,90px);border-bottom:1px solid var(--line)}header a{text-decoration:none}.brand{display:flex;align-items:center;gap:14px;font-weight:800;letter-spacing:.07em}.brand img{width:38px;height:38px;object-fit:cover}nav{display:flex;gap:20px}
+main{width:min(1100px,90%);margin:auto;padding:70px 0 100px}.eyebrow{font-size:12px;letter-spacing:.19em;text-transform:uppercase;color:#ff8a83;font-weight:800}.hero h1{max-width:900px;line-height:1.07;font-size:clamp(36px,6vw,72px);letter-spacing:-.045em;margin:14px 0}.hero h1 span{color:var(--red)}.hero p{max-width:690px;color:var(--muted);font-size:18px}.actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}.button{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;border:1px solid #625050;border-radius:8px;padding:13px 22px;font-weight:750;background:#231d20;gap:10px}.button.primary{background:#c8292d;border-color:#c8292d;color:#fff}.button:hover{background:#7c2027;color:white}.tag{display:inline-block;padding:4px 10px;background:#3c2a2c;border:1px solid #734448;border-radius:999px;color:#f7b5ae;font-size:12px;font-weight:700}
+.section{margin-top:70px}.section h2{font-size:clamp(24px,3.3vw,38px);line-height:1.15}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:24px}.card h3{font-size:18px;margin:0 0 9px}.card p{color:var(--muted);margin:0}.notice{border-left:3px solid #d8605a;background:#2a1b20;padding:17px 20px;border-radius:3px;color:#f0cdca}
+ol{padding-left:21px}li{margin:10px 0}code{overflow-wrap:anywhere;background:#201c1e;color:#ffd6d2;padding:2px 5px;border-radius:3px}pre{background:#141215;border:1px solid #493536;border-radius:10px;padding:18px;white-space:pre-wrap;overflow-wrap:anywhere;color:#e8d7d7}pre code{padding:0;background:none;color:inherit}.muted{color:var(--muted)}.meta{margin-top:30px}.link{color:#ffaaa4}footer{border-top:1px solid var(--line);color:var(--muted);text-align:center;padding:28px 20px;font-size:13px}
+@media(max-width:760px){nav{gap:10px;font-size:13px}.grid{grid-template-columns:1fr}main{padding-top:44px}.hero p{font-size:16px}}
+</style></head>
+<body>
+<header><a class="brand" href="/"><img src="../assets/perfil.png" alt="Logo JOA00FC">JOA00FC</a><nav aria-label="Navegação"><a href="/">Início</a><a href="#download">Download</a><a href="#tutorial">Tutorial</a><a href="https://github.com/JOA00FC/JOA00FC.github.io/tree/main/mw3-ptbr">GitHub</a></nav></header>
+<main>
+<section class="hero" id="download"><p class="eyebrow">JOA00FC · Campanha de PC · 2011</p><h1>Modern Warfare 3<br><span>em português brasileiro.</span></h1>
+<p>Jogue a campanha com menus, objetivos, instruções e legendas em PT-BR. O ZIP de 208 KB reúne os dois instaladores para aplicar a tradução pelo Termux no Android.</p><div class="actions"><a class="button primary" download href="download/MW3_PTBR_Termux.zip">Baixar tradução ↓</a><a class="button" href="#tutorial">Como instalar</a><a class="button" href="https://steamrip.com/" target="_blank" rel="noopener noreferrer">Site usado para baixar o jogo · SteamRIP ↗</a></div></section>
+<section class="section" id="tutorial"><h2>Instalação pelo Termux</h2><p>Use a edição de Windows em inglês com <code>iw5sp.exe</code> e <code>zone/english</code>. Feche o GameHub, reserve cerca de 4 GB livres e salve o ZIP na pasta Download do Android.</p>
+<p>Na primeira utilização do Termux, instale o Python e permita o acesso ao armazenamento.</p><pre><code>pkg install python
+termux-setup-storage</code></pre><p>Se o jogo estiver em <code>/sdcard/X360/Call of Duty - Modern Warfare 3</code>, cole o bloco abaixo. Para outra pasta, acrescente <code>--jogo "/caminho/do/jogo"</code> aos dois comandos que executam arquivos .pyz.</p><pre><code>cd /sdcard/Download &amp;&amp;
+python -m zipfile -e MW3_PTBR_Termux.zip MW3_PTBR &amp;&amp;
+python MW3_PTBR/MW3_PTBR_Parte_1_de_2.pyz &amp;&amp;
+python MW3_PTBR/MW3_PTBR_Parte_2_de_2.pyz</code></pre>
+<p>Quando a segunda parte confirmar a instalação, abra o jogo e ative as legendas nas opções de áudio. Na missão <i>Black Tuesday</i>, procure o título <strong>Terça Negra</strong>.</p>
+<details><summary>Como restaurar os arquivos anteriores</summary><p>Preserve a pasta de backup dentro de <code>zone/english</code>. Com o jogo fechado, execute os dois instaladores com a opção de restauração. Se usou uma pasta personalizada, informe-a novamente.</p><pre><code>cd /sdcard/Download/MW3_PTBR &amp;&amp;
+python MW3_PTBR_Parte_1_de_2.pyz --restaurar &amp;&amp;
+python MW3_PTBR_Parte_2_de_2.pyz --restaurar</code></pre></details></section>
+<section class="section"><h2>Créditos e compatibilidade</h2><p>Tradução de base da equipe GameVicio. Edição do canal JOA00FC com revisão de textos e instalador para Android. O instalador confere a compatibilidade dos arquivos antes de aplicar cada parte.</p><p>Encontrou um trecho em inglês? Envie ao canal o nome da missão e uma captura de tela.</p><div class="actions"><a class="button" href="https://github.com/JOA00FC/JOA00FC.github.io/tree/main/mw3-ptbr">Arquivos no GitHub</a><a class="button" href="/mw2-ptbr/">Tradução do MW2 (2009)</a></div></section></main><footer>JOA00FC · MW3 (2011)</footer></body></html>
